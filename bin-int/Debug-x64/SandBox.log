@@ -1,0 +1,5 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: 中间目录(E:\Personal\D_Hero\D_Hero_Prj\\bin-int\Debug-x64\)包含从另一个项目(D_Hero_Prj.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: 中间目录(E:\Personal\D_Hero\D_Hero_Prj\\bin-int\Debug-x64\)包含从另一个项目(SandBox.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  Application.cpp
+E:\Personal\D_Hero\D_Hero_Prj\SandBox\src\Application.cpp(5,13): warning C4326: “main”的返回类型应为“int”而非“void”
+  SandBox.vcxproj -> E:\Personal\D_Hero\D_Hero_Prj\bin\Debug-x64\SandBox.exe
