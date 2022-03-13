@@ -120,6 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DH_PLATFORM_WINDOWS;DH_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)D_Hero_Prj\ThirdParty\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,6 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DH_PLATFORM_WINDOWS;DH_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)D_Hero_Prj\ThirdParty\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,9 +145,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\DHero\Log.cpp" />
     <ClCompile Include="src\DHero\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\DHero\Log.h" />
     <ClInclude Include="src\DHero.h" />
     <ClInclude Include="src\DHero\Application.h" />
     <ClInclude Include="src\DHero\Core.h" />
