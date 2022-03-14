@@ -4,6 +4,9 @@
     <Filter Include="DHero">
       <UniqueIdentifier>{77BAF60C-E3CE-1EBE-AC50-C21D18241BEF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DHero\Events">
+      <UniqueIdentifier>{7B1AF18E-677D-8033-1003-B9E9FC444CB6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DHero.h" />
@@ -16,9 +19,28 @@
     <ClInclude Include="src\DHero\EntryPoint.h">
       <Filter>DHero</Filter>
     </ClInclude>
+    <ClInclude Include="src\DHero\Events\ApplicationEvent.h">
+      <Filter>DHero\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DHero\Events\Event.h">
+      <Filter>DHero\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DHero\Events\KeyCodes.h">
+      <Filter>DHero\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DHero\Events\KeyEvent.h">
+      <Filter>DHero\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DHero\Events\MouseCodes.h">
+      <Filter>DHero\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DHero\Events\MouseEvent.h">
+      <Filter>DHero\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\DHero\Log.h">
       <Filter>DHero</Filter>
     </ClInclude>
+    <ClInclude Include="src\dhpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DHero\Application.cpp">
@@ -27,5 +49,6 @@
     <ClCompile Include="src\DHero\Log.cpp">
       <Filter>DHero</Filter>
     </ClCompile>
+    <ClCompile Include="src\dhpch.cpp" />
   </ItemGroup>
 </Project>

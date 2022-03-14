@@ -18,12 +18,16 @@ project "D_Hero_Prj"
 	targetdir ("bin/" .. OUT_DIR .. "./%{prj.name}")
 	objdir ("bin-int/" .. OUT_DIR .. "./%{prj.name}")
 
+	pchheader "dhpch.h"
+	pchsource "D_Hero_Prj/src/dhpch.cpp"
+
 	files {
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
 	}
 
 	includedirs {
+		"%{prj.name}/src",
 		"%{prj.name}/ThirdParty/spdlog/include"
 	}
 
@@ -68,8 +72,8 @@ project "SandBox"
 	}
 
 	includedirs {
+		"D_Hero_Prj/src",
 		"D_Hero_Prj/ThirdParty/spdlog/include",
-		"D_Hero_Prj/src"
 	}
 
 	links {
