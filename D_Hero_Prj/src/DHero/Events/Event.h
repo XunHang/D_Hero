@@ -16,14 +16,14 @@ namespace DH {
 		None = 0,
 		EventCategoryApplication	= BIT(0),
 		EventCategoryInput			= BIT(1),
-		EventCategoryKeybord		= BIT(2),
+		EventCategoryKeyboard		= BIT(2),
 		EventCategoryMouse			= BIT(3),
 		EventCategoryMouseButton	= BIT(4)
 	};
 
 // 宏参数前面加 '#'  会对宏参数进行字符串化操作，既前后各添加双引号；
 // 宏参数前面加 '##' 会将两个 Token 连接为一个
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; } \
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; } \
 								virtual EventType GetEventType() const override { return GetStaticType(); } \
 								virtual const char* GetName() const override {return #type; }
 

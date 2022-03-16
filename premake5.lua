@@ -10,6 +10,13 @@ workspace "D_Hero_Prj"
 
 OUT_DIR = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+
+IncludeDir = {}
+IncludeDir["GLFW"] = "D_Hero_Prj/ThirdParty/GLFW/include"
+IncludeDir["GLAD"] = "D_Hero_Prj/ThirdParty/GLAD/include"
+
+include "/D_Hero_Prj/ThirdParty/"
+
 project "D_Hero_Prj"
 	location "D_Hero_Prj"
 	kind "SharedLib"
@@ -26,10 +33,18 @@ project "D_Hero_Prj"
 		"%{prj.name}/src/**.cpp",
 	}
 
-	includedirs {
-		"%{prj.name}/src",
-		"%{prj.name}/ThirdParty/spdlog/include"
-	}
+    includedirs {
+        "%{prj.name}/src",
+        "%{prj.name}/ThirdParty/spdlog/include",
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.GLAD}"
+    }
+
+    links {
+        "GLFW",
+		"GLAD",
+        "opengl32.lib"
+    }
 
 	filter "system:windows"
 		cppdialect "c++17"

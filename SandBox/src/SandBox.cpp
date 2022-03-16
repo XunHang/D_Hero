@@ -1,4 +1,3 @@
-#include "dhpch.h"
 #include <DHero.h>
 
 class SandBox :public DH::Application {
