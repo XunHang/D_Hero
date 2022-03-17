@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "Events/Event.h"
 #include "Window.h"
+#include "DHero/LayerStack.h"
 
 
 namespace DH {
@@ -17,11 +18,16 @@ namespace DH {
 
 		void OnEvent(Event& e);
 
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
+
+	private:
+		bool OnWindowClose(WindowCloseEvent& e);
+
 	private:
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
-
-		bool OnWindowClose(WindowCloseEvent& e);
+		LayerStack m_LayerStack;
 	};
 
 	// To Do by Client.

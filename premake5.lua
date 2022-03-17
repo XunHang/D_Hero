@@ -63,16 +63,20 @@ project "D_Hero_Prj"
 			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. OUT_DIR .. "/SandBox")
 		}
 
+	-- /MD : 解决 spdLog 在应用与引擎中都开辟空间引发的崩溃问题
 	filter "configurations:Debug"
 		defines "DH_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "DH_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "DH_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 
@@ -107,14 +111,18 @@ project "SandBox"
 			"DH_PLATFORM_WINDOWS"
 		}
 
+	-- /MD : 解决 spdLog 在应用与引擎中都开辟空间引发的崩溃问题
 	filter "configurations:Debug"
 		defines "DH_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "DH_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "DH_DIST"
+		buildoptions "/MD"
 		optimize "On"
