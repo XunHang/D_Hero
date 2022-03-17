@@ -56,7 +56,8 @@ project "D_Hero_Prj"
 
 		defines {
 			"DH_PLATFORM_WINDOWS",
-			"DH_BUILD_DLL"
+			"DH_BUILD_DLL",
+			"GLFW_INCLUDE_NONE",  -- glfw 不再包含 gl 有关头文件
 		}
 
 		postbuildcommands {

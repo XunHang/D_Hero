@@ -9,9 +9,6 @@ project "GLAD"
 		"GLAD/include/glad/glad.h",
 		"GLAD/include/KHR/khrplatform.h",
 		"GLAD/src/glad.c"
-		-- "include/glad/glad.h",
-		-- "include/KHR/khrplatform.h",
-		-- "src/glad.c"
 	}
 
 	includedirs { --项目包含的目录
@@ -29,6 +26,9 @@ project "GLAD"
 	filter "configurations:Release" --Release模式
 		runtime "Release" 
 		optimize "on" --开启优化
+
+	filter { "system:windows", "configurations:Release" }
+		buildoptions "/MT"
 
 project "GLFW"
 	kind "StaticLib"
@@ -119,3 +119,6 @@ project "GLFW"
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "on"
+
+	filter { "system:windows", "configurations:Release" }
+		buildoptions "/MT"
