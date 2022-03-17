@@ -1,7 +1,7 @@
 # Directories
-/.vs/
-/bin/
-/bin-int/
+.vs/
+bin
+bin-int
 
 # Files
 *.sln
@@ -9,3 +9,5 @@
 *.user
 *.filters
 
+
+/D_Hero_Prj/ThirdParty/bin-int

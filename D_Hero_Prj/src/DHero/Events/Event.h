@@ -1,5 +1,5 @@
 #pragma once
-
+#include "dhpch.h"
 #include "DHero/Core.h"
 
 namespace DH {
@@ -23,13 +23,13 @@ namespace DH {
 
 // 宏参数前面加 '#'  会对宏参数进行字符串化操作，既前后各添加双引号；
 // 宏参数前面加 '##' 会将两个 Token 连接为一个
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; } \
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; } \
 								virtual EventType GetEventType() const override { return GetStaticType(); } \
 								virtual const char* GetName() const override {return #type; }
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	class Event {
+	class DH_API Event {
 	public:
 		// 关键字 default: 定义默认虚构函数
 		virtual ~Event() = default;
@@ -49,7 +49,7 @@ namespace DH {
 	};
 
 	// 事件分发器
-	class EventDispatcher {
+	class DH_API EventDispatcher {
 	public:
 		EventDispatcher(Event& event)
 			: m_Event(event) {

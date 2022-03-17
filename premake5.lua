@@ -1,5 +1,8 @@
 workspace "D_Hero_Prj"
+
 	architecture "x86_64"
+
+	startproject "SandBox" 
 
 	configurations
 	{

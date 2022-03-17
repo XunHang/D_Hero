@@ -2,7 +2,7 @@
 
 namespace DH
 {
-	using KeyCode = uint16_t;
+	using KeyCode = unsigned int;
 
 	namespace Key
 	{

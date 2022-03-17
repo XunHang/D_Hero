@@ -2,7 +2,7 @@
 
 namespace DH
 {
-	using MouseCode = uint16_t;
+	using MouseCode = unsigned int ;
 
 	namespace Mouse
 	{

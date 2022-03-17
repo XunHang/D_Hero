@@ -4,6 +4,9 @@
 
 #include "DHero/Core.h"
 #include "DHero/Events/Event.h"
+#include "DHero/Events/KeyEvent.h"
+#include "DHero/Events/MouseEvent.h"
+#include "DHero/Events/ApplicationEvent.h"
 
 namespace DH {
 
