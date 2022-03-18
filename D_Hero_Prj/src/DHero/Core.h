@@ -22,3 +22,5 @@
 #endif
 
 #define BIT(x) (1<<x)
+
+#define DH_BIND_EVENT_FN(x,y) std::bind(&x::y, this, std::placeholders::_1)

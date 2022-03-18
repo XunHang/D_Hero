@@ -83,6 +83,13 @@ namespace DH {
 			}
 		});
 
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int codepoint) {
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			KeyTypedEvent event(codepoint);
+			data.EventCallback(event);
+			});
+
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -124,6 +131,8 @@ namespace DH {
 	void WindowsWindow::OnUpdate() {
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
+		glClearColor(0.0f, 0.2f, 0.4f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
 	void WindowsWindow::SetVSync(bool enabled) {
@@ -138,6 +147,5 @@ namespace DH {
 	bool WindowsWindow::IsVSync() const {
 		return m_Data.VSync; 
 	}
-
 
 }

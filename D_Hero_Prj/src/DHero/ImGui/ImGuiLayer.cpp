@@ -26,8 +26,8 @@ namespace DH {
 		io.KeyMap[ImGuiKey_Space] = GLFW_KEY_SPACE;
 
 
-		ImGui::StyleColorsDark();		// Choose your favorite style.
-		//ImGui::StyleColorsClassic();
+		//ImGui::StyleColorsDark();		// Choose your favorite style.
+		ImGui::StyleColorsClassic();
 
 		ImGui_ImplOpenGL3_Init("#version 330");
 	}
@@ -45,34 +45,83 @@ namespace DH {
 
 		ImGui::NewFrame();
 
-		// show imgui sample window
-		bool show_demo_window = true;
-		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-		static float f = 0.0f;
-		static int counter = 0;
-
-		ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-
-		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-		ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-			counter++;
-		ImGui::SameLine();
-		ImGui::Text("counter = %d", counter);
-
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		ImGui::End();
+		ImGui::ShowDemoWindow();
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
-
+	
 	void ImGuiLayer::OnEvent(Event& e) {
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatcher<MouseButtonPressedEvent>(DH_BIND_EVENT_FN(ImGuiLayer, OnMouseButtonPressedEvent));
+		dispatcher.Dispatcher<MouseButtonReleasedEvent>(DH_BIND_EVENT_FN(ImGuiLayer, OnMouseButtonReleasedEvent));
+		dispatcher.Dispatcher<MouseMovedEvent>(DH_BIND_EVENT_FN(ImGuiLayer, OnMouseMovedEvent));
+		dispatcher.Dispatcher<MouseScrolledEvent>(DH_BIND_EVENT_FN(ImGuiLayer, OnMouseScrolledEvent));
+		dispatcher.Dispatcher<KeyTypedEvent>(DH_BIND_EVENT_FN(ImGuiLayer, OnKeyTypedEvent));
+		dispatcher.Dispatcher<KeyPressedEvent>(DH_BIND_EVENT_FN(ImGuiLayer, OnKeyPressedEvent));
+		dispatcher.Dispatcher<KeyReleasedEvent>(DH_BIND_EVENT_FN(ImGuiLayer, OnKeyReleasedEvent));
+		dispatcher.Dispatcher<WindowResizeEvent>(DH_BIND_EVENT_FN(ImGuiLayer, OnWindowResizeEvent));
+
 
 	}
+
+	bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e) {
+		ImGuiIO& io = ImGui::GetIO();
+		io.MouseDown[e.GetMouseButton()] = true;
+
+		return false;
+	}
+
+	bool ImGuiLayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e) {
+		ImGuiIO& io = ImGui::GetIO();
+		io.MouseDown[e.GetMouseButton()] = false;
+
+		return false;
+	}
+
+	bool ImGuiLayer::OnMouseMovedEvent(MouseMovedEvent& e) {
+		ImGuiIO& io = ImGui::GetIO();
+		io.MousePos = ImVec2((float)e.GetXPos(), (float)e.GetYPos());
+
+		return false;
+	}
+
+	bool ImGuiLayer::OnMouseScrolledEvent(MouseScrolledEvent& e) {
+		ImGuiIO& io = ImGui::GetIO();
+		io.MouseWheelH += e.GetXOffset();
+		io.MouseWheel  += e.GetYOffset();
+
+		return false;
+	}
+
+	bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent& e) {
+		ImGuiIO& io = ImGui::GetIO();
+		io.KeysDown[e.GetKeyCode()] = true;
+
+		return false;
+	}
+
+	bool ImGuiLayer::OnKeyTypedEvent(KeyTypedEvent& e) {
+		ImGuiIO& io = ImGui::GetIO();
+		io.AddInputCharacter(e.GetKeyCode());
+
+		return false;
+	}
+
+	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e) {
+		ImGuiIO& io = ImGui::GetIO();
+		io.KeysDown[e.GetKeyCode()] = false;
+
+		return false;
+	}
+
+	bool ImGuiLayer::OnWindowResizeEvent(WindowResizeEvent& e) {
+		ImGuiIO& io = ImGui::GetIO();
+		io.DisplaySize = ImVec2((float)e.GetWidth(), (float)e.GetHeight());
+		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+		//glViewPort(0, 0, )
+
+		return false;
+	}
+
 }

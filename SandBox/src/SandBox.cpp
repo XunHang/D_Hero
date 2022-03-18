@@ -12,11 +12,17 @@ public:
 	}
 
 	void OnUpdate() override {
-		DH_INFO("Example Layer Update");
+		//DH_INFO("Example Layer Update");
+		if (DH::Input::IsKeyPressed(DH::Key::Space))
+			DH_INFO("Space Button is pressed.");
 	}
 
 	void OnEvent(DH::Event& e) override {
-		DH_TRACE("{0}", e);
+		//DH_TRACE("{0}", e);
+		if (e.GetEventType() == DH::EventType::KeyPressed) {
+			DH::KeyPressedEvent& ke = (DH::KeyPressedEvent&)e;
+			DH_TRACE("{0}", (char)ke.GetKeyCode());
+		}
 	}
 };
 
@@ -34,9 +40,3 @@ public:
 DH::Application* DH::CreaterApplication() {
 	return new SandBox();
 }
-
-//void main() {
-//	SandBox* sandBox = new SandBox();
-//	sandBox->Run();
-//	delete sandBox;
-//}

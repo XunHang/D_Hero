@@ -8,6 +8,7 @@ bin-int
 *.vcxproj
 *.user
 *.filters
+*.ini
 
 
 /D_Hero_Prj/ThirdParty/bin-int

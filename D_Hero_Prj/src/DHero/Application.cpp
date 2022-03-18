@@ -2,20 +2,18 @@
 #include "Application.h"
 
 #include "DHero/Events/ApplicationEvent.h"
-
+#include "DHero/Input.h"
 
 namespace DH {
 
 	Application* Application::s_Instance = nullptr;
-
-	#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 	Application::Application() {
 		DH_ASSERT(!s_Instance, "Application already inited.");
 		s_Instance = this;
 		
 		m_Window = std::unique_ptr<Window>(Window::Create());
-		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		m_Window->SetEventCallback(DH_BIND_EVENT_FN(Application, OnEvent));
 	}
 
 	Application::~Application() {
@@ -40,7 +38,7 @@ namespace DH {
 	void Application::OnEvent(Event& e) {
 
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatcher<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+		dispatcher.Dispatcher<WindowCloseEvent>(DH_BIND_EVENT_FN(Application, OnWindowClose));
 
 		//DH_CORE_TRACE("{0}", e);
 
@@ -52,11 +50,6 @@ namespace DH {
 			if (e.Handled)
 				break;
 		}
-		//for (Layer* layer : m_LayerStack) {
-		//	layer->OnEvent(e);
-		//	if (e.Handled)
-		//		break;
-		//}
 	}
 
 	void Application::Run() {
@@ -66,8 +59,12 @@ namespace DH {
 			DH_TRACE(e);
 
 		while(m_Running) {
+
 			for (auto it : m_LayerStack)
 				it->OnUpdate();
+
+			//auto [x, y] = Input::GetMousePosition();
+			//DH_TRACE("{0}, {1}", x, y);
 
 			m_Window->OnUpdate();
 		}
