@@ -122,3 +122,41 @@ project "GLFW"
 
 	filter { "system:windows", "configurations:Release" }
 		buildoptions "/MT"
+
+
+project "imgui"
+	kind "StaticLib" --项目类型为静态库
+	language "C++" --语言为C
+
+	targetdir ("bin/" .. OUT_DIR .. "/%{prj.name}") --生成目录
+	objdir ("bin-int/" .. OUT_DIR .. "/%{prj.name}") --中间文件目录
+
+	files { --项目的源文件
+		"imgui/imconfig.h",
+		"imgui/imgui.cpp",
+		"imgui/imgui.h",
+		"imgui/imgui_demo.cpp",
+		"imgui/imgui_draw.cpp",
+		"imgui/imgui_internal.h",
+		"imgui/imgui_tables.cpp",
+		"imgui/imgui_widgets.cpp",
+		"imgui/imstb_rectpack.h",
+		"imgui/imstb_textedit.h",
+		"imgui/imstb_truetype.h",
+	}
+	
+	filter "system:windows"
+		systemversion "latest"
+		cppdialect "C++17"
+		staticruntime "On"
+
+	filter "configurations:Debug" --Debug模式的配置
+		runtime "Debug" --运行时
+		symbols "on" --开启pdb文件
+
+	filter "configurations:Release" --Release模式
+		runtime "Release" 
+		optimize "on" --开启优化
+
+	filter { "system:windows", "configurations:Release" }
+		buildoptions "/MT"

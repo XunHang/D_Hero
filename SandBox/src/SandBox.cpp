@@ -23,7 +23,8 @@ public:
 class SandBox :public DH::Application {
 public:
 	SandBox() {
-		PushLayer(new ExampleLayer);
+		PushLayer(new ExampleLayer());
+		PushLayer(new DH::ImGuiLayer());
 	}
 	~SandBox() {
 
