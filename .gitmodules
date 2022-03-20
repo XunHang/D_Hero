@@ -7,3 +7,6 @@
 [submodule "D_Hero_Prj/ThirdParty/imgui"]
 	path = D_Hero_Prj/ThirdParty/imgui
 	url = https://github.com/XunHang/imgui
+[submodule "D_Hero_Prj/ThirdParty/glm"]
+	path = D_Hero_Prj/ThirdParty/glm
+	url = https://github.com/g-truc/glm
