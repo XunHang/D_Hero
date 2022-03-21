@@ -144,7 +144,10 @@ project "imgui"
 		"imgui/imstb_textedit.h",
 		"imgui/imstb_truetype.h",
 	}
-	
+	defines {
+		"IMGUI_API=__declspec(dllexport)",
+	}
+
 	filter "system:windows"
 		systemversion "latest"
 		cppdialect "C++17"

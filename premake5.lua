@@ -18,6 +18,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "D_Hero_Prj/ThirdParty/GLFW/include"
 IncludeDir["GLAD"] = "D_Hero_Prj/ThirdParty/GLAD/include"
 IncludeDir["imgui"] = "D_Hero_Prj/ThirdParty/imgui"
+IncludeDir["glm"] = "D_Hero_Prj/ThirdParty/glm"
 
 include "/D_Hero_Prj/ThirdParty/"
 
@@ -35,6 +36,8 @@ project "D_Hero_Prj"
 	files {
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{IncludeDir.glm}/glm/**.hpp",
+		"%{IncludeDir.glm}/glm/**.inl"
 	}
 
     includedirs {
@@ -42,7 +45,8 @@ project "D_Hero_Prj"
         "%{prj.name}/ThirdParty/spdlog/include",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.GLAD}",
-        "%{IncludeDir.imgui}"
+        "%{IncludeDir.imgui}",
+        "%{IncludeDir.glm}"
     }
 
     links {
@@ -100,6 +104,8 @@ project "SandBox"
 	includedirs {
 		"D_Hero_Prj/src",
 		"D_Hero_Prj/ThirdParty/spdlog/include",
+        "%{IncludeDir.imgui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links {

@@ -1,5 +1,15 @@
 #include <DHero.h>
 
+#include "imgui.h"
+#include <glm/vec3.hpp>
+#include <glm/mat4x4.hpp>
+
+glm::mat4 camera(float Translate, glm::vec2 const& Rotate) {
+	glm::mat4 res = glm::mat4(1.0f);
+	return res;
+}
+
+
 class ExampleLayer :public DH::Layer {
 public:
 	ExampleLayer() 
@@ -17,6 +27,12 @@ public:
 			DH_INFO("Space Button is pressed.");
 	}
 
+	void OnImGuiRender() override {
+		ImGui::Begin("Test");
+		ImGui::Text("Hello world.");
+		ImGui::End();
+	}
+
 	void OnEvent(DH::Event& e) override {
 		//DH_TRACE("{0}", e);
 		if (e.GetEventType() == DH::EventType::KeyPressed) {
@@ -30,7 +46,6 @@ class SandBox :public DH::Application {
 public:
 	SandBox() {
 		PushLayer(new ExampleLayer());
-		PushLayer(new DH::ImGuiLayer());
 	}
 	~SandBox() {
 

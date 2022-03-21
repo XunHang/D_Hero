@@ -4,6 +4,9 @@
 #include "DHero/Events/ApplicationEvent.h"
 #include "DHero/Input.h"
 
+#include "glm/glm.hpp"
+#include "glad/glad.h"
+
 namespace DH {
 
 	Application* Application::s_Instance = nullptr;
@@ -14,6 +17,9 @@ namespace DH {
 		
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(DH_BIND_EVENT_FN(Application, OnEvent));
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	Application::~Application() {
@@ -59,9 +65,16 @@ namespace DH {
 			DH_TRACE(e);
 
 		while(m_Running) {
+			//glClearColor(0.0f, 0.2f, 0.4f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
 
 			for (auto it : m_LayerStack)
 				it->OnUpdate();
+
+			m_ImGuiLayer->begin();
+			for (auto it : m_LayerStack)
+				it->OnImGuiRender();
+			m_ImGuiLayer->end();
 
 			//auto [x, y] = Input::GetMousePosition();
 			//DH_TRACE("{0}, {1}", x, y);

@@ -4,6 +4,7 @@
 #include "Events/Event.h"
 #include "Window.h"
 #include "DHero/LayerStack.h"
+#include "ImGui/ImGuiLayer.h"
 
 
 namespace DH {
@@ -13,6 +14,7 @@ namespace DH {
 	public:
 		Application();
 		virtual ~Application();
+		inline static Application& Get() { return *s_Instance; }
 
 		void Run();
 
@@ -21,18 +23,18 @@ namespace DH {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
-		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() const { return *m_Window; }
 
-	private:
-		bool OnWindowClose(WindowCloseEvent& e);
-
-	private:
+	protected:
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		ImGuiLayer* m_ImGuiLayer;
 
+	private:
+		bool OnWindowClose(WindowCloseEvent& e);
 		static Application* s_Instance;
+
 	};
 
 	// To Do by Client.

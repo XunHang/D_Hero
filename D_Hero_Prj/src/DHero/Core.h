@@ -5,12 +5,16 @@
 		#define DH_API __declspec(dllexport)
 	#else
 		#define DH_API __declspec(dllimport)
+		#define IMGUI_API __declspec(dllimport)
 	#endif
 #else
 	#error Please Define Platform.(Only support Windows)
 #endif
 
 // ASSERTION
+#ifdef DH_DEBUG
+	#define DH_ENABLE_ASSERTS
+#endif
 #ifdef DH_ENABLE_ASSERTS
 #ifdef DH_PLATFORM_WINDOWS
 #define DH_ASSERT(x,...) {if (!(x)) { DH_ERROR("Assertion Failed! {0}", __VA_ARGS__); __debugbreak(); } }

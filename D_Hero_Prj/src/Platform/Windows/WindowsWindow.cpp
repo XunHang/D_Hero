@@ -131,8 +131,6 @@ namespace DH {
 	void WindowsWindow::OnUpdate() {
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
-		glClearColor(0.0f, 0.2f, 0.4f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
 	void WindowsWindow::SetVSync(bool enabled) {
