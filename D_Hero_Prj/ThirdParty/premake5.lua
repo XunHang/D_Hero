@@ -1,5 +1,6 @@
 project "GLAD"
 	kind "StaticLib" --项目类型为静态库
+	staticruntime "On"
 	language "C" --语言为C
 
 	targetdir ("bin/" .. OUT_DIR .. "/%{prj.name}") --生成目录
@@ -17,7 +18,6 @@ project "GLAD"
 	
 	filter "system:windows"
 		systemversion "latest"
-		staticruntime "On"
 
 	filter "configurations:Debug" --Debug模式的配置
 		runtime "Debug" --运行时
@@ -27,11 +27,12 @@ project "GLAD"
 		runtime "Release" 
 		optimize "on" --开启优化
 
-	filter { "system:windows", "configurations:Release" }
-		buildoptions "/MT"
+--	filter { "system:windows", "configurations:Release" }
+--		buildoptions "/MT"
 
 project "GLFW"
-	kind "StaticLib"
+	kind "StaticLib"	
+	staticruntime "On"
 	language "C"
 
 	targetdir ("bin/" .. OUT_DIR .. "/%{prj.name}")
@@ -68,7 +69,6 @@ project "GLFW"
 		pic "On"
 
 		systemversion "latest"
-		staticruntime "On"
 
 		files
 		{
@@ -90,7 +90,6 @@ project "GLFW"
 
 	filter "system:windows"
 		systemversion "latest"
-		staticruntime "On"
 
 		files {
 			"GLFW/src/win32_init.c",
@@ -120,13 +119,15 @@ project "GLFW"
 		runtime "Release"
 		optimize "on"
 
-	filter { "system:windows", "configurations:Release" }
-		buildoptions "/MT"
+--	filter { "system:windows", "configurations:Release" }
+--		buildoptions "/MT"
 
 
 project "imgui"
 	kind "StaticLib" --项目类型为静态库
+	staticruntime "On"
 	language "C++" --语言为C
+	cppdialect "C++17"
 
 	targetdir ("bin/" .. OUT_DIR .. "/%{prj.name}") --生成目录
 	objdir ("bin-int/" .. OUT_DIR .. "/%{prj.name}") --中间文件目录
@@ -145,13 +146,11 @@ project "imgui"
 		"imgui/imstb_truetype.h",
 	}
 	defines {
-		"IMGUI_API=__declspec(dllexport)",
+--		"IMGUI_API=__declspec(dllexport)",
 	}
 
 	filter "system:windows"
 		systemversion "latest"
-		cppdialect "C++17"
-		staticruntime "On"
 
 	filter "configurations:Debug" --Debug模式的配置
 		runtime "Debug" --运行时
@@ -161,5 +160,5 @@ project "imgui"
 		runtime "Release" 
 		optimize "on" --开启优化
 
-	filter { "system:windows", "configurations:Release" }
-		buildoptions "/MT"
+--	filter { "system:windows", "configurations:Release" }
+--		buildoptions "/MT"

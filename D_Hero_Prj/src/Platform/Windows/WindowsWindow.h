@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DHero/Window.h"
+#include "DHero/Renderer/GraphicsContext.h"
 
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
@@ -27,6 +28,7 @@ namespace DH {
 
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData {
 			std::string Title;

@@ -60,7 +60,7 @@ namespace DH {
         ImGuiIO& io = ImGui::GetIO(); (void)io;
  
 
-        static bool show_demo_window = true;
+        static bool show_demo_window = false;
         //static bool show_another_window = true;
         static ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
@@ -115,7 +115,7 @@ namespace DH {
         ImGuiIO& io = ImGui::GetIO(); (void)io;
 
         Application& app = Application::Get();
-        io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
+        io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
 
         // Rendering
         ImGui::Render();

@@ -6,6 +6,8 @@
 #include "DHero/LayerStack.h"
 #include "ImGui/ImGuiLayer.h"
 
+#include "DHero/Renderer/Shader.h"
+#include "DHero/Renderer/Buffer.h"
 
 namespace DH {
 
@@ -31,10 +33,14 @@ namespace DH {
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_ImGuiLayer;
 
+		unsigned int m_VertArray;
+		std::unique_ptr<Shader> m_Shader;
+		std::unique_ptr<VertexBuffer> m_VertBuffer;
+		std::unique_ptr<IndexBuffer> m_IndxBuffer;
+
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		static Application* s_Instance;
-
 	};
 
 	// To Do by Client.

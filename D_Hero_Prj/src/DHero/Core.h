@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef DH_PLATFORM_WINDOWS
-	#ifdef DH_BUILD_DLL
-		#define DH_API __declspec(dllexport)
+	#ifdef DH_STATIC_VERSION
+		#define DH_API
 	#else
-		#define DH_API __declspec(dllimport)
-		#define IMGUI_API __declspec(dllimport)
+		#ifdef DH_BUILD_DLL
+			#define DH_API __declspec(dllexport)
+		#else
+			#define DH_API __declspec(dllimport)
+			#define IMGUI_API __declspec(dllimport)
+		#endif
 	#endif
 #else
 	#error Please Define Platform.(Only support Windows)

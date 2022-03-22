@@ -1,6 +1,7 @@
 #include "dhpch.h"
 #include "DHero/Log.h"
 #include "WindowsWindow.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace DH {
 
@@ -37,9 +38,13 @@ namespace DH {
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		DH_ASSERT(status, "Failed to load GLAD");
+		
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
+		// init °üº¬ makeContext & gladLoad
+		//glfwMakeContextCurrent(m_Window)
+		//int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		//DH_ASSERT(status, "Failed to load GLAD");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -130,7 +135,9 @@ namespace DH {
 
 	void WindowsWindow::OnUpdate() {
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
+
+		//glfwSwapBuffers(m_Window);
 	}
 
 	void WindowsWindow::SetVSync(bool enabled) {

@@ -24,7 +24,9 @@ include "/D_Hero_Prj/ThirdParty/"
 
 project "D_Hero_Prj"
 	location "D_Hero_Prj"
-	kind "SharedLib"
+--	kind "SharedLib"  -- 动态链接库
+	kind "StaticLib"  -- 静态链接库
+	staticruntime "On"
 	language "C++"
 	
 	targetdir ("bin/" .. OUT_DIR .. "./%{prj.name}")
@@ -63,34 +65,33 @@ project "D_Hero_Prj"
 
 		defines {
 			"DH_PLATFORM_WINDOWS",
-			"DH_BUILD_DLL",
-			"GLFW_INCLUDE_NONE",  -- glfw 不再包含 gl 有关头文件
+			"DH_STATIC_VERSION",
+			--"DH_BUILD_DLL",		-- 控制是否编译为 dll
+			"GLFW_INCLUDE_NONE",	-- glfw 不再包含 gl 有关头文件,
+			"_CRT_SECURE_NO_WARNINGS"--去除 unsafe warning
 		}
 
-		postbuildcommands {
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. OUT_DIR .. "/SandBox")
-		}
+--		postbuildcommands {
+--			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. OUT_DIR .. "/SandBox")
+--		}
 
-	-- /MD : 解决 spdLog 在应用与引擎中都开辟空间引发的崩溃问题
 	filter "configurations:Debug"
 		defines "DH_DEBUG"
-		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "DH_RELEASE"
-		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "DH_DIST"
-		buildoptions "/MD"
 		optimize "On"
 
 
 project "SandBox"
 	location "SandBox"
 	kind "ConsoleApp"
+	staticruntime "On"
 	language "C++"
 	
 	targetdir ("bin/" .. OUT_DIR .. "./%{prj.name}")
@@ -112,27 +113,27 @@ project "SandBox"
 		"D_Hero_Prj"
 	}
 
+	defines {
+		"DH_STATIC_VERSION",
+	}
+
 	filter "system:windows"
 		cppdialect "c++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines {
-			"DH_PLATFORM_WINDOWS"
+			"DH_PLATFORM_WINDOWS",
 		}
 
 	-- /MD : 解决 spdLog 在应用与引擎中都开辟空间引发的崩溃问题
 	filter "configurations:Debug"
 		defines "DH_DEBUG"
-		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "DH_RELEASE"
-		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "DH_DIST"
-		buildoptions "/MD"
 		optimize "On"
