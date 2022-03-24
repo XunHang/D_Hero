@@ -1,6 +1,6 @@
 #pragma once
 #include "dhpch.h"
-#include "DHero/Core.h"
+#include "DHero/Core/Core.h"
 
 namespace DH {
 

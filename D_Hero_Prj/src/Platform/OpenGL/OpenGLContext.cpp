@@ -15,9 +15,9 @@ namespace DH {
 		DH_ASSERT(status, "Failed to load GLAD");
 
 		DH_CORE_INFO("OpenGL Info:");
-		DH_CORE_INFO("\tVendor: {0}", glGetString(GL_VENDOR));
-		DH_CORE_INFO("\tRenderer: {0}", glGetString(GL_RENDERER));
-		DH_CORE_INFO("\tVersion: {0}", glGetString(GL_VERSION));
+		DH_CORE_INFO("\tVendor: {0}", (const char*)(glGetString(GL_VENDOR)));
+		DH_CORE_INFO("\tRenderer: {0}", (const char*)glGetString(GL_RENDERER));
+		DH_CORE_INFO("\tVersion: {0}", (const char*)glGetString(GL_VERSION));
 	}
 
 	void OpenGLContext::SwapBuffers() {

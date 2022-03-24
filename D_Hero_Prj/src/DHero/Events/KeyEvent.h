@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DHero/Events/Event.h"
-#include "DHero/KeyCodes.h"
+#include "DHero/Core/KeyCodes.h"
 
 namespace DH {
 

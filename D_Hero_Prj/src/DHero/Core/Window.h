@@ -2,7 +2,7 @@
 
 #include "dhpch.h"
 
-#include "DHero/Core.h"
+#include "Core.h"
 #include "DHero/Events/Event.h"
 #include "DHero/Events/KeyEvent.h"
 #include "DHero/Events/MouseEvent.h"

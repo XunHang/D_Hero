@@ -1,9 +1,9 @@
 #pragma once
 
-#include "DHero/Window.h"
+#include "DHero/Core/Window.h"
 #include "DHero/Renderer/GraphicsContext.h"
 
-#include <GLAD/glad.h>
+//#include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace DH {

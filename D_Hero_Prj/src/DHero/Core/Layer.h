@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DHero/Core.h"
+#include "Core.h"
 #include "DHero/Events/Event.h"
 
 

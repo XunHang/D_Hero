@@ -1,5 +1,5 @@
 #include "dhpch.h"
-#include "DHero/Log.h"
+
 #include "WindowsWindow.h"
 #include "Platform/OpenGL/OpenGLContext.h"
 

@@ -1,13 +1,15 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h"
 #include "Window.h"
-#include "DHero/LayerStack.h"
-#include "ImGui/ImGuiLayer.h"
+#include "LayerStack.h"
+
+#include "DHero/Events/Event.h"
+#include "DHero/ImGui/ImGuiLayer.h"
 
 #include "DHero/Renderer/Shader.h"
 #include "DHero/Renderer/Buffer.h"
+#include "DHero/Renderer/VertexArray.h"
 
 namespace DH {
 
@@ -33,10 +35,13 @@ namespace DH {
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_ImGuiLayer;
 
-		unsigned int m_VertArray;
-		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<VertexBuffer> m_VertBuffer;
-		std::unique_ptr<IndexBuffer> m_IndxBuffer;
+		std::shared_ptr<VertexArray> m_VertArray_0;
+		std::shared_ptr<VertexArray> m_VertArray_1;
+		std::shared_ptr<Shader> m_Shader_0;
+		std::shared_ptr<Shader> m_Shader_1;
+		std::shared_ptr<VertexBuffer> m_VertBuffer_0;
+		std::shared_ptr<VertexBuffer> m_VertBuffer_1;
+		std::shared_ptr<IndexBuffer> m_IndxBuffer;
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);

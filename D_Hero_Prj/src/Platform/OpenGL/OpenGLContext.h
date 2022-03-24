@@ -1,8 +1,10 @@
 #pragma once
 
-#include "DHero/Core.h"
-#include "DHero/Window.h"
+#include "DHero/Core/Core.h"
+#include "DHero/Core/Window.h"
+
 #include "DHero/Renderer/GraphicsContext.h"
+
 #include <GLFW/glfw3.h>
 
 namespace DH {

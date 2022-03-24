@@ -1,7 +1,7 @@
 #pragma once
 
-#include "DHero/Core.h"
-#include "DHero/Input.h"
+#include "DHero/Core/Core.h"
+#include "DHero/Core/Input.h"
 
 
 namespace DH {

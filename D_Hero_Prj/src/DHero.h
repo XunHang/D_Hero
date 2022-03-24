@@ -2,15 +2,16 @@
 
 // For DHero Application
 #include "dhpch.h"
-#include "DHero/Application.h"
-#include "DHero/Log.h"
-#include "DHero/Layer.h"
+#include "DHero/Core/Application.h"
+#include "DHero/Core/Log.h"
+#include "DHero/Core/Layer.h"
+
+#include "DHero/Core/Input.h"
+#include "DHero/Core/KeyCodes.h"
+#include "DHero/Core/MouseCodes.h"
+
 #include "DHero/ImGui/ImGuiLayer.h"
 
-#include "DHero/Input.h"
-#include "DHero/KeyCodes.h"
-#include "DHero/MouseCodes.h"
-
 // ---------- Entry Point ----------
-#include "DHero/EntryPoint.h"
+#include "DHero/Core/EntryPoint.h"
 // ---------------------------------

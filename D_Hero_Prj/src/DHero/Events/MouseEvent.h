@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DHero/Events/Event.h"
-#include "DHero/MouseCodes.h"
+#include "DHero/Core/MouseCodes.h"
 
 
 namespace DH {

@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "DHero/Log.h"
+#include "DHero/Core/Log.h"
 
 #ifdef DH_PLATFORM_WINDOWS
 	#include <Windows.h>

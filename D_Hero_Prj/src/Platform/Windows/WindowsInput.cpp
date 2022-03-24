@@ -1,7 +1,8 @@
 #include "dhpch.h"
 #include "WIndowsInput.h"
 
-#include "DHero/Application.h"
+#include "DHero/Core/Application.h"
+
 #include <GLFW/glfw3.h>
 
 namespace DH {

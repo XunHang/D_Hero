@@ -1,7 +1,9 @@
 #pragma once
 
-#include "DHero/Core.h"
+#include "DHero/Core/Core.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace DH {
 	class DH_API Shader {
@@ -11,6 +13,8 @@ namespace DH {
 
 		void Bind() const;
 		void UnBind() const;
+
+		void UploadUniformMat4(const std::string& param, glm::mat4&);
 
 	protected:
 	

@@ -1,13 +1,15 @@
 #include "dhpch.h"
 
 #include "ImGuiLayer.h"
+#include "DHero/Core/Application.h"
+
 #include "imgui.h"
 #include "backends/imgui_impl_opengl3.h"
 #include "backends/imgui_impl_glfw.h"
 
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "DHero/Application.h"
+//#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 
 namespace DH {
 	ImGuiLayer::ImGuiLayer() 
@@ -81,7 +83,7 @@ namespace DH {
 
             ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
             ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-            glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+            //glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
             if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
                 counter++;
             ImGui::SameLine();
