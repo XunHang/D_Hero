@@ -24,15 +24,15 @@ namespace DH {
 
 		// vertex buffer
 		float vertices_0[3 * (3+4)] = {
-			-0.25f, -0.25f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-			 0.25f, -0.25f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
-			 0.0f,   0.25f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+			-0.25f, -0.25f, -0.5f, 1.0f, 1.0f, 0.0f, 1.0f,
+			 0.25f, -0.25f, -0.5f, 1.0f, 0.0f, 1.0f, 1.0f,
+			 0.0f,   0.25f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
 		};
 		float vertices_1[3 * 4] = {
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f,
-			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, -0.5f,
+			 0.5f,  0.5f, -0.5f,
+			-0.5f,  0.5f, -0.5f,
+			-0.5f, -0.5f, -0.5f,
 		};
 		// index buffer
 		unsigned int indices[6] = { 0, 1, 2, 0, 2, 3 };
@@ -76,13 +76,17 @@ namespace DH {
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
+			uniform mat4 model;
+			uniform mat4 view;
+			uniform mat4 projection;
 			uniform mat4 vp;
 
 			out vec4 m_Color;
 
 			void main () {
 				m_Color = a_Color;
-				gl_Position = vp*vec4(a_Position, 1.0);
+				//gl_Position = projection * view * model * vec4(a_Position, 1.0);
+				gl_Position = vp * model * vec4(a_Position, 1.0);
 			}			
 		)";
 		std::string fragmentShader_0 = R"(
@@ -145,24 +149,28 @@ namespace DH {
 		}
 	}
 
-	#include "DHero/Camera/OrthographicCamera.h"
+#include "DHero/Camera/OrthographicCamera.h"
+#include <glm/glm.hpp>
 	void Application::Run() {
 		
 		WindowResizeEvent e(1024, 768);
 		if(e.IsInCategory(EventCategoryApplication))
 			DH_TRACE(e);
 
-		OrthographicCamera* camera = new OrthographicCamera(0, 768, 0, 1024);
+		OrthographicCamera* camera = new OrthographicCamera(-1, 1, -1, 1);
 
 		while(m_Running) {
 			RenderCommand::Clear();
 			RenderCommand::ClearColor({ 0.2f, 0.2f, 0.2f, 1.0f});
+			
+			glm::vec3 pos(0.0f, 0.0f, 0.0f);
+			glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos);
 
 			Renderer::BeginScene(*camera);
 			{
-				Renderer::Submit(m_Shader_1, m_VertArray_1);
+				Renderer::Submit(m_Shader_1, m_VertArray_1, transform);
 
-				Renderer::Submit(m_Shader_0, m_VertArray_0);
+				Renderer::Submit(m_Shader_0, m_VertArray_0, transform);
 			}
 			Renderer::EndScene();
 

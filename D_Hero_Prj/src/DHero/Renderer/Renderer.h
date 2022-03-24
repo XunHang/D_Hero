@@ -29,7 +29,7 @@ namespace DH {
 		static void EndScene();
 
 		// 通过 RenderCommand 把 VAO 信息传递给 RenderCommandQueue
-		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>&);
+		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>&, const glm::mat4&);
 
 
 	protected:
@@ -37,6 +37,8 @@ namespace DH {
 	private:
 		struct SceneData
 		{
+			glm::mat4 View;
+			glm::mat4 Projection;
 			glm::mat4 ViewProjectionMatrix;
 		};
 

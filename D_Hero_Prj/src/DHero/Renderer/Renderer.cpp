@@ -14,23 +14,23 @@ namespace DH {
 
 	void Renderer::BeginScene(OrthographicCamera& camera) {
 		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
-		glm::mat4 tmp{
-		1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f};
-		//s_SceneData->ViewProjectionMatrix = tmp;
-		DH_CORE_INFO("{0}", glm::to_string(s_SceneData->ViewProjectionMatrix));
+		s_SceneData->View = camera.GetViewMatrix();
+		s_SceneData->Projection= camera.GetProjectionMatrix();
 	}
 
 	void Renderer::EndScene() {
 	
 	}
 	
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray) {
+	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& model) {
 		shader->Bind();
+		shader->UploadUniformMat4("model", model);
+		//shader->UploadUniformMat4("view", s_SceneData->View);
+		//shader->UploadUniformMat4("projection", s_SceneData->Projection);
 		shader->UploadUniformMat4("vp", s_SceneData->ViewProjectionMatrix);
+
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);
 	}
 }
+
