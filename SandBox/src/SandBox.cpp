@@ -1,6 +1,10 @@
 #include <DHero.h>
+// ---------- Entry Point ----------
+#include "DHero/Core/EntryPoint.h"
+// ---------------------------------
 
-#include "imgui.h"
+#include "ExampleLayer.h"
+
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
 
@@ -9,42 +13,18 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate) {
 	return res;
 }
 
-
-class ExampleLayer :public DH::Layer {
-public:
-	ExampleLayer() 
-	:Layer("Example"){
-
-	}
-
-	~ExampleLayer() {
-
-	}
-
-	void OnUpdate() override {
-		//DH_INFO("Example Layer Update");
-		if (DH::Input::IsKeyPressed(DH::Key::Space))
-			DH_INFO("Space Button is pressed.");
-	}
-
-	void OnImGuiRender() override {
-		ImGui::Begin("Test");
-		ImGui::Text("Hello world.");
-		ImGui::End();
-	}
-
-	void OnEvent(DH::Event& e) override {
-		//DH_TRACE("{0}", e);
-		if (e.GetEventType() == DH::EventType::KeyPressed) {
-			DH::KeyPressedEvent& ke = (DH::KeyPressedEvent&)e;
-			DH_TRACE("{0}", (char)ke.GetKeyCode());
-		}
-	}
-};
-
 class SandBox :public DH::Application {
 public:
 	SandBox() {
+		DH_ASSERT(!s_Instance, "Application already inited.");
+		s_Instance = this;
+
+		m_Window = std::unique_ptr<DH::Window>(DH::Window::Create());
+		m_Window->SetEventCallback(DH_BIND_EVENT_FN(Application, OnEvent));
+
+		m_ImGuiLayer = new DH::ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
+
 		PushLayer(new ExampleLayer());
 	}
 	~SandBox() {

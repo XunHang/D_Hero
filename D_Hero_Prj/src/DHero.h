@@ -9,9 +9,12 @@
 #include "DHero/Core/Input.h"
 #include "DHero/Core/KeyCodes.h"
 #include "DHero/Core/MouseCodes.h"
+#include "DHero/Core/TimeStep.h"
+
+#include "DHero/Renderer/Renderer.h"
+#include "DHero/Renderer/Shader.h"
+#include "DHero/Renderer/VertexArray.h"
+#include "DHero/Camera/OrthographicCamera.h"
 
 #include "DHero/ImGui/ImGuiLayer.h"
 
-// ---------- Entry Point ----------
-#include "DHero/Core/EntryPoint.h"
-// ---------------------------------

@@ -34,18 +34,12 @@ namespace DH {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_ImGuiLayer;
+		float m_LastFrameTime;
 
-		std::shared_ptr<VertexArray> m_VertArray_0;
-		std::shared_ptr<VertexArray> m_VertArray_1;
-		std::shared_ptr<Shader> m_Shader_0;
-		std::shared_ptr<Shader> m_Shader_1;
-		std::shared_ptr<VertexBuffer> m_VertBuffer_0;
-		std::shared_ptr<VertexBuffer> m_VertBuffer_1;
-		std::shared_ptr<IndexBuffer> m_IndxBuffer;
+		static Application* s_Instance;
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
-		static Application* s_Instance;
 	};
 
 	// To Do by Client.
