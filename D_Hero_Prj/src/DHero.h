@@ -14,6 +14,8 @@
 #include "DHero/Renderer/Renderer.h"
 #include "DHero/Renderer/Shader.h"
 #include "DHero/Renderer/VertexArray.h"
+#include "DHero/Renderer/Texture.h"
+
 #include "DHero/Camera/OrthographicCamera.h"
 
 #include "DHero/ImGui/ImGuiLayer.h"

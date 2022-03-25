@@ -4,18 +4,18 @@
 
 
 ExampleLayer::ExampleLayer()
-	:Layer("Example"), m_Camera(-1, 1, -1, 1) {
+	:Layer("Example"), m_Camera(-2, 2, -1.5, 1.5) {
 	// vertex buffer
 	float vertices_0[3 * (3 + 4)] = {
 		-0.25f, -0.25f, -0.5f, 1.0f, 1.0f, 0.0f, 1.0f,
-			0.25f, -0.25f, -0.5f, 1.0f, 0.0f, 1.0f, 1.0f,
-			0.0f,   0.25f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		 0.25f, -0.25f, -0.5f, 1.0f, 0.0f, 1.0f, 1.0f,
+		 0.0f,   0.25f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
 	};
-	float vertices_1[3 * 4] = {
-			0.5f, -0.5f, -0.5f,
-			0.5f,  0.5f, -0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f, -0.5f, -0.5f,
+	float vertices_1[(3+2) * 4] = {
+		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
 	};
 	// index buffer
 	unsigned int indices[6] = { 0, 1, 2, 0, 2, 3 };
@@ -44,6 +44,7 @@ ExampleLayer::ExampleLayer()
 	{
 		DH::BufferLayout layout = {
 			{DH::ShaderDataType::Float3, "a_Position"},
+			{DH::ShaderDataType::Float2, "a_Tex"},
 		};
 		m_VertBuffer_1->SetLayout(layout);
 	}
@@ -57,6 +58,7 @@ ExampleLayer::ExampleLayer()
 		
 		layout(location = 0) in vec3 a_Position;
 		layout(location = 1) in vec4 a_Color;
+		layout (location = 2) in vec2 a_Tex;
 
 		uniform mat4 model;
 		uniform mat4 view;
@@ -64,17 +66,39 @@ ExampleLayer::ExampleLayer()
 		uniform mat4 vp;
 
 		out vec4 m_Color;
+		out vec2 texCoord;
 
 		void main () {
 			m_Color = a_Color;
 			//gl_Position = projection * view * model * vec4(a_Position, 1.0);
 			gl_Position = vp * model * vec4(a_Position, 1.0);
+			texCoord = a_Tex;
+		}			
+	)";
+	std::string vertexShader2 = R"(
+		#version 330 core
+		
+		layout(location = 0) in vec3 a_Position;
+		layout (location = 1) in vec2 a_Tex;
+
+		uniform mat4 model;
+		uniform mat4 view;
+		uniform mat4 projection;
+		uniform mat4 vp;
+
+		out vec2 texCoord;
+
+		void main () {
+			//gl_Position = projection * view * model * vec4(a_Position, 1.0);
+			gl_Position = vp * model * vec4(a_Position, 1.0);
+			texCoord = a_Tex;
 		}			
 	)";
 	std::string fragmentShader_0 = R"(
 		#version 330 core
 			
 		in vec4 m_Color;
+
 		out vec4 color;
 
 		void main () {
@@ -84,15 +108,21 @@ ExampleLayer::ExampleLayer()
 	std::string fragmentShader_1 = R"(
 		#version 330 core
 			
+		in vec2 texCoord;
+		uniform sampler2D ourTexture;
+
 		out vec4 color;
 
 		void main () {
-			color = vec4(0.8, 0.2, 0.0, 1.0);
+			color = texture(ourTexture, texCoord);
 		}			
 	)";
 
 	m_Shader_0.reset(new DH::Shader(vertexShader, fragmentShader_0));
-	m_Shader_1.reset(new DH::Shader(vertexShader, fragmentShader_1));
+	m_Shader_1.reset(new DH::Shader(vertexShader2, fragmentShader_1));
+
+	m_Texture_0.reset(DH::Texture2D::Create("Assert/cat.png"));
+	//m_Texture_0 = DH::Texture2D::Create(10,10);
 }
 
 ExampleLayer::~ExampleLayer() {
@@ -109,6 +139,7 @@ void ExampleLayer::OnUpdate(DH::TimeStep& ts) {
 
 	DH::Renderer::BeginScene(m_Camera);
 	{
+		m_Texture_0->Bind(0);
 		DH::Renderer::Submit(m_Shader_1, m_VertexArray_1, transform);
 
 		DH::Renderer::Submit(m_Shader_0, m_VertexArray_0, transform);

@@ -146,7 +146,7 @@ project "imgui"
 		"imgui/imstb_truetype.h",
 	}
 	defines {
---		"IMGUI_API=__declspec(dllexport)",
+	  --"IMGUI_API=__declspec(dllexport)",
 	}
 
 	filter "system:windows"
@@ -160,5 +160,30 @@ project "imgui"
 		runtime "Release" 
 		optimize "on" --开启优化
 
---	filter { "system:windows", "configurations:Release" }
---		buildoptions "/MT"
+
+project "stb_image"
+	kind "StaticLib" --项目类型为静态库
+	staticruntime "On"
+	language "C++" --语言为C
+	cppdialect "C++17"
+
+	targetdir ("bin/" .. OUT_DIR .. "/%{prj.name}") --生成目录
+	objdir ("bin-int/" .. OUT_DIR .. "/%{prj.name}") --中间文件目录
+
+	files { --项目的源文件
+		"stb_image/stb_image.h",
+		"stb_image/stb_image.cpp",
+	}
+	defines {
+--		"IMGUI_API=__declspec(dllexport)",
+	}
+	filter "system:windows"
+		systemversion "latest"
+
+	filter "configurations:Debug" --Debug模式的配置
+		runtime "Debug" --运行时
+		symbols "on" --开启pdb文件
+
+	filter "configurations:Release" --Release模式
+		runtime "Release" 
+		optimize "on" --开启优化

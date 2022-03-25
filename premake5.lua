@@ -19,6 +19,7 @@ IncludeDir["GLFW"] = "D_Hero_Prj/ThirdParty/GLFW/include"
 IncludeDir["GLAD"] = "D_Hero_Prj/ThirdParty/GLAD/include"
 IncludeDir["imgui"] = "D_Hero_Prj/ThirdParty/imgui"
 IncludeDir["glm"] = "D_Hero_Prj/ThirdParty/glm"
+IncludeDir["stb_image"] = "D_Hero_Prj/ThirdParty/stb_image"
 
 include "/D_Hero_Prj/ThirdParty/"
 
@@ -48,13 +49,15 @@ project "D_Hero_Prj"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.GLAD}",
         "%{IncludeDir.imgui}",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.stb_image}"
     }
 
     links {
         "GLFW",
 		"GLAD",
 		"imgui",
+		"stb_image",
         "opengl32.lib"
     }
 

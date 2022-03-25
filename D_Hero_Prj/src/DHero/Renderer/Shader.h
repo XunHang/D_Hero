@@ -14,6 +14,7 @@ namespace DH {
 		void Bind() const;
 		void UnBind() const;
 
+		void UploadUniform1i(const std::string& paramName, const int& value);
 		void UploadUniformMat4(const std::string& param, const glm::mat4&);
 
 	protected:

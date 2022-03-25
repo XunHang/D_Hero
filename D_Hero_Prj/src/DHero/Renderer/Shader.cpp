@@ -75,6 +75,11 @@ namespace DH {
 		glUseProgram(0);
 	}
 
+	void Shader::UploadUniform1i(const std::string& paramName, const int& value) {
+		//int location = glGetUniformLocation(m_RendererID, paramName.c_str());
+		glUniform1i(glGetUniformLocation(m_RendererID, paramName.c_str()), value);
+	}
+
 	void Shader::UploadUniformMat4(const std::string& paramName, const glm::mat4& matrix) {
 		int location = glGetUniformLocation(m_RendererID, paramName.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));

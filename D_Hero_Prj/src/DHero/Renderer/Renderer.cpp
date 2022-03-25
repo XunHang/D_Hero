@@ -24,6 +24,7 @@ namespace DH {
 	
 	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& model) {
 		shader->Bind();
+		//shader->UploadUniform1i("ourTexture", 0);
 		shader->UploadUniformMat4("model", model);
 		//shader->UploadUniformMat4("view", s_SceneData->View);
 		//shader->UploadUniformMat4("projection", s_SceneData->Projection);
