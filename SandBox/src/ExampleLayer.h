@@ -13,8 +13,7 @@ private:
 	void OnEvent(DH::Event& e) override;
 
 	DH::OrthographicCamera m_Camera;
-	std::shared_ptr<DH::Shader> m_Shader_0;
-	std::shared_ptr<DH::Shader> m_Shader_1;
+	std::shared_ptr<DH::ShaderLibrary> m_ShaderLibrary;
 	std::shared_ptr<DH::Texture2D> m_Texture_0;
 	std::shared_ptr<DH::VertexArray> m_VertexArray_0;
 	std::shared_ptr<DH::VertexArray> m_VertexArray_1;

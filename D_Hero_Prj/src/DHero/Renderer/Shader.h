@@ -8,18 +8,16 @@
 namespace DH {
 	class DH_API Shader {
 	public:
-		Shader(const std::string& vertexSrc, const std::string& fragmentSrc);
-		~Shader();
+		~Shader() {};
 
-		void Bind() const;
-		void UnBind() const;
+		static std::shared_ptr<Shader> Create(const std::string& path);
+		static std::shared_ptr<Shader> Create(const std::string& vSrc, const std::string& fSrc);
 
-		void UploadUniform1i(const std::string& paramName, const int& value);
-		void UploadUniformMat4(const std::string& param, const glm::mat4&);
+		virtual void Bind() const = 0;
+		virtual void UnBind() const = 0;
 
-	protected:
-	
-	private:
-		uint32_t m_RendererID;	
+		virtual void UploadUniformMat4(const std::string& uniformName, glm::mat4 matrix) = 0;
+		virtual void UploadUniformVec4(const std::string& uniformName, glm::vec4 vec4) = 0;
+		virtual void UploadUniformI1(const std::string& uniformName, int id) = 0;
 	};
 }

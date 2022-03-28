@@ -19,7 +19,9 @@ public:
 		DH_ASSERT(!s_Instance, "Application already inited.");
 		s_Instance = this;
 
-		m_Window = std::unique_ptr<DH::Window>(DH::Window::Create());
+		m_Window = std::unique_ptr<DH::Window>(DH::Window::Create(
+			{ "Sand Box", 800, 600 }
+		));
 		m_Window->SetEventCallback(DH_BIND_EVENT_FN(Application, OnEvent));
 
 		m_ImGuiLayer = new DH::ImGuiLayer();

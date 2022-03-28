@@ -52,74 +52,11 @@ ExampleLayer::ExampleLayer()
 	m_VertexArray_1->AddVertexBuffer(m_VertBuffer_1);
 	m_VertexArray_1->AddIndexBuffer(m_IndxBuffer);
 
-	// Bind Shader
-	std::string vertexShader = R"(
-		#version 330 core
-		
-		layout(location = 0) in vec3 a_Position;
-		layout(location = 1) in vec4 a_Color;
-		layout (location = 2) in vec2 a_Tex;
-
-		uniform mat4 model;
-		uniform mat4 view;
-		uniform mat4 projection;
-		uniform mat4 vp;
-
-		out vec4 m_Color;
-		out vec2 texCoord;
-
-		void main () {
-			m_Color = a_Color;
-			//gl_Position = projection * view * model * vec4(a_Position, 1.0);
-			gl_Position = vp * model * vec4(a_Position, 1.0);
-			texCoord = a_Tex;
-		}			
-	)";
-	std::string vertexShader2 = R"(
-		#version 330 core
-		
-		layout(location = 0) in vec3 a_Position;
-		layout (location = 1) in vec2 a_Tex;
-
-		uniform mat4 model;
-		uniform mat4 view;
-		uniform mat4 projection;
-		uniform mat4 vp;
-
-		out vec2 texCoord;
-
-		void main () {
-			//gl_Position = projection * view * model * vec4(a_Position, 1.0);
-			gl_Position = vp * model * vec4(a_Position, 1.0);
-			texCoord = a_Tex;
-		}			
-	)";
-	std::string fragmentShader_0 = R"(
-		#version 330 core
-			
-		in vec4 m_Color;
-
-		out vec4 color;
-
-		void main () {
-			color = m_Color;
-		}			
-	)";
-	std::string fragmentShader_1 = R"(
-		#version 330 core
-			
-		in vec2 texCoord;
-		uniform sampler2D ourTexture;
-
-		out vec4 color;
-
-		void main () {
-			color = texture(ourTexture, texCoord);
-		}			
-	)";
-
-	m_Shader_0.reset(new DH::Shader(vertexShader, fragmentShader_0));
-	m_Shader_1.reset(new DH::Shader(vertexShader2, fragmentShader_1));
+	m_ShaderLibrary = std::make_shared<DH::ShaderLibrary>();
+	m_ShaderLibrary->Load("D://git//D_Hero//shaders//flatColorShader.glsl");
+	m_ShaderLibrary->Load("D://git//D_Hero//shaders//textureShader.glsl");
+	//m_Shader_0 = DH::Shader::Create("D://git//D_Hero//shaders//flatColorShader.glsl");
+	//m_Shader_1 = DH::Shader::Create("D://git//D_Hero//shaders//textureShader.glsl");
 
 	m_Texture_0.reset(DH::Texture2D::Create("Assert/cat.png"));
 	//m_Texture_0 = DH::Texture2D::Create(10,10);
@@ -134,15 +71,19 @@ void ExampleLayer::OnUpdate(DH::TimeStep& ts) {
 	DH::RenderCommand::Clear();
 	DH::RenderCommand::ClearColor(m_FlatColor);
 
-	glm::vec3 pos(0.0f, 0.0f, 0.0f);
-	glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos);
+	glm::vec3 pos_0(0.5f, 0.0f, 0.0f);
+	glm::vec3 pos_1(-0.5f, 0.0f, 0.0f);
+	glm::mat4 transform_0 = glm::translate(glm::mat4(1.0f), pos_0);
+	glm::mat4 transform_1 = glm::translate(glm::mat4(1.0f), pos_1);
+
+	auto flatColorShader = m_ShaderLibrary->Get("flatColorShader");
+	auto textureShader = m_ShaderLibrary->Get("textureShader");
 
 	DH::Renderer::BeginScene(m_Camera);
 	{
 		m_Texture_0->Bind(0);
-		DH::Renderer::Submit(m_Shader_1, m_VertexArray_1, transform);
-
-		DH::Renderer::Submit(m_Shader_0, m_VertexArray_0, transform);
+		DH::Renderer::Submit(flatColorShader, m_VertexArray_0, transform_0);
+		DH::Renderer::Submit(textureShader, m_VertexArray_1, transform_1);
 	}
 	DH::Renderer::EndScene();
 

@@ -60,9 +60,9 @@ namespace DH {
 
 	void Application::Run() {
 		
-		WindowResizeEvent e(1024, 768);
-		if(e.IsInCategory(EventCategoryApplication))
-			DH_TRACE(e);
+		//WindowResizeEvent e(800, 800);
+		//if(e.IsInCategory(EventCategoryApplication))
+		//	DH_TRACE(e);
 
 
 		while(m_Running) {

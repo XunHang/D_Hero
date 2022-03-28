@@ -6,7 +6,7 @@ namespace DH {
 
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top, float n, float f)
 		:m_ProjectionMatrix(glm::ortho(left, right, bottom, top, n, f)), m_ViewMatrix(1.0f){
-		//m_ProjectionMatrix = glm::perspective(glm::radians(45.0f), (float)(1024 / 768), 0.1f, 100.0f);
+
 		//m_ViewProjectionMatrix = m_ProjectionMatrix* m_ViewMatrix;
 		m_ViewProjectionMatrix = m_ViewMatrix * m_ProjectionMatrix;
 	}

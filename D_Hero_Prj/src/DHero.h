@@ -12,7 +12,7 @@
 #include "DHero/Core/TimeStep.h"
 
 #include "DHero/Renderer/Renderer.h"
-#include "DHero/Renderer/Shader.h"
+#include "DHero/Renderer/ShaderLibrary.h"
 #include "DHero/Renderer/VertexArray.h"
 #include "DHero/Renderer/Texture.h"
 
