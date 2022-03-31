@@ -15,11 +15,9 @@ namespace DH {
 
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application() {
-		m_LastFrameTime = (float)glfwGetTime();
-
-
-		
+	Application::Application()
+	:m_LastFrameTime((float)glfwGetTime()), m_ImGuiLayer(nullptr){
+				
 	}
 
 	Application::~Application() {
@@ -41,10 +39,16 @@ namespace DH {
 		return true;
 	}
 
+	bool Application::OnWindowResize(WindowResizeEvent& e) {
+		m_Window->OnResize(e.GetWidth(), e.GetHeight());
+		return true;
+	}
+
 	void Application::OnEvent(Event& e) {
 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatcher<WindowCloseEvent>(DH_BIND_EVENT_FN(Application, OnWindowClose));
+		dispatcher.Dispatcher<WindowResizeEvent>(DH_BIND_EVENT_FN(Application, OnWindowResize));
 
 		//DH_CORE_TRACE("{0}", e);
 
@@ -73,11 +77,12 @@ namespace DH {
 			for (auto it : m_LayerStack)
 				it->OnUpdate(timestep);
 
-			m_ImGuiLayer->begin();
-			for (auto it : m_LayerStack)
-				it->OnImGuiRender();
-			m_ImGuiLayer->end();
-
+			if (m_ImGuiLayer) {
+				m_ImGuiLayer->begin();
+				for (auto it : m_LayerStack)
+					it->OnImGuiRender();
+				m_ImGuiLayer->end();
+			}
 
 			m_Window->OnUpdate();
 		}

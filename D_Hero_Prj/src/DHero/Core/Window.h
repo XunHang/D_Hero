@@ -31,6 +31,7 @@ namespace DH {
 		virtual ~Window() = default;
 
 		virtual void OnUpdate() = 0;
+		virtual void OnResize(unsigned int, unsigned int) = 0;
 
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;

@@ -4,7 +4,7 @@
 
 namespace DH {
 	unsigned int OpenGLShader::StringToGLShaderType(const std::string& name) {
-		DH_CORE_TRACE("Shader Type: {0}", name);
+		//DH_CORE_TRACE("Shader Type: {0}", name);
 		if (name == "vertex")	return GL_VERTEX_SHADER;
 		if (name == "fragment") return GL_FRAGMENT_SHADER;
 		if (name == "geometry")	return GL_GEOMETRY_SHADER;
@@ -56,9 +56,9 @@ namespace DH {
 		GLint program = glCreateProgram();;
 		GLint _status = 0;
 		for (auto it : shaders) {
-			DH_CORE_TRACE("Shader Type: {0}", it.first);
-			DH_CORE_TRACE("Shader Content:");
-			DH_CORE_TRACE("{0}", it.second);
+			//DH_CORE_TRACE("Shader Type: {0}", it.first);
+			//DH_CORE_TRACE("Shader Content:");
+			//DH_CORE_TRACE("{0}", it.second);
 			const GLchar* source = (const GLchar*)(it.second).c_str();
 			glShaderSource(it.first, 1, &source, nullptr);
 			glCompileShader(it.first);

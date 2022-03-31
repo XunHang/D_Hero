@@ -130,7 +130,10 @@ namespace DH {
 
 	void WindowsWindow::Shutdown() {
 		glfwDestroyWindow(m_Window);
+	}
 
+	void WindowsWindow::OnResize(unsigned int width, unsigned int height) {
+		glViewport(0, 0, width, height);
 	}
 
 	void WindowsWindow::OnUpdate() {

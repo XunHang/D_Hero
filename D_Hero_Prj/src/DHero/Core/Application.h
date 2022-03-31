@@ -40,6 +40,7 @@ namespace DH {
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
 	};
 
 	// To Do by Client.

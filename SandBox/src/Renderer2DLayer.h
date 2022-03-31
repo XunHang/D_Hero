@@ -2,10 +2,10 @@
 #include "DHero.h"
 #include "imgui.h"
 
-class ExampleLayer :public DH::Layer {
+class Renderer2DLayer :public DH::Layer {
 public:
-	ExampleLayer();
-	~ExampleLayer();
+	Renderer2DLayer();
+	~Renderer2DLayer();
 
 private:
 	void OnUpdate(DH::TimeStep& ts) override;
@@ -13,10 +13,7 @@ private:
 	void OnEvent(DH::Event& e) override;
 
 	DH::OrthographicCameraController m_CameraController;
-	std::shared_ptr<DH::ShaderLibrary> m_ShaderLibrary;
-	std::shared_ptr<DH::Texture2D> m_Texture_0;
-	std::shared_ptr<DH::VertexArray> m_VertexArray_0;
-	std::shared_ptr<DH::VertexArray> m_VertexArray_1;
+	std::shared_ptr<DH::Texture2D> m_Texture;
 
 	glm::vec4 m_FlatColor = glm::vec4(0.2, 0.3, 0.8, 1.0);
 };

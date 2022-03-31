@@ -3,7 +3,7 @@
 #include "DHero/Core/Window.h"
 #include "DHero/Renderer/GraphicsContext.h"
 
-//#include <GLAD/glad.h>
+#include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace DH {
@@ -42,6 +42,7 @@ namespace DH {
 
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
+		virtual void OnResize(unsigned int width, unsigned int height);
 	};
 
 }

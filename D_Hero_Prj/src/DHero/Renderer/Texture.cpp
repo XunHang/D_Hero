@@ -7,26 +7,26 @@
 
 namespace DH {
 
-	Texture2D* Texture2D::Create(const std::string& path)
+	std::shared_ptr<Texture2D> Texture2D::Create(const std::string& path)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::Type::None:
 			DH_CORE_ASSERT(false, "Please Choose The Renderer API.");
 		case RendererAPI::Type::OpenGL:
-			return new OpenGLTexture2D(path);
+			return std::make_shared<OpenGLTexture2D>(path);
 		default:
 			break;
 		}
 	}
-	Texture2D* Texture2D::Create(uint32_t width, uint32_t height)
+	std::shared_ptr<Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::Type::None:
 			DH_CORE_ASSERT(false, "Please Choose The Renderer API.");
 		case RendererAPI::Type::OpenGL:
-			return new OpenGLTexture2D(width, height);
+			return std::make_shared<OpenGLTexture2D>(width, height);
 		default:
 			break;
 		}

@@ -4,6 +4,7 @@
 // ---------------------------------
 
 #include "ExampleLayer.h"
+#include "Renderer2DLayer.h"
 
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
@@ -27,7 +28,8 @@ public:
 		m_ImGuiLayer = new DH::ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		PushLayer(new ExampleLayer());
+		PushLayer(new Renderer2DLayer());
+		//PushLayer(new ExampleLayer());
 	}
 	~SandBox() {
 
